@@ -23,22 +23,26 @@ fn process_instruction<'a>(
     info!("STAKING!");
 
     let result: ProgramResult = match instruction {
-        RegistryInstruction::Initialize { nonce, } => {
+        RegistryInstruction::Initialize { nonce } => {
             info!("Initialize INSTRUCTION!");
             Ok(())
         }
+        RegistryInstruction::Deposit { amount } => Ok(()),
         RegistryInstruction::CreateEntity { capabilities } => {
             info!("REGISTRY INSTRUCTION!");
             Ok(())
         }
-        RegistryInstruction::Stake { entity_id } => {
+        RegistryInstruction::Stake {
+            amount,
+            beneficiary,
+        } => {
             info!("DELEGATE INSTRUCTION!");
             Ok(())
         }
-				RegistryInstruction::CollectRewards {} => {
-						info!("Collect rewards");
-						Ok(())
-				}
+        RegistryInstruction::CollectRewards => {
+            info!("Collect rewards");
+            Ok(())
+        }
     };
 
     result?;
